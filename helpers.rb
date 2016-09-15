@@ -8,7 +8,7 @@ module Helpers
     arry.each do |x|
       above += 1 unless x <= n
       below += 1 unless x >= n
-    end
+    end unless arry.nil?
 
     {:above => above, :below => below}
   end
