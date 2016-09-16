@@ -1,4 +1,3 @@
-
 module Helpers
 
   def above_below_given(arry, n)
@@ -13,7 +12,9 @@ module Helpers
     {:above => above, :below => below}
   end
 
-  def get_flattened(arry)
+  # Flattens an array of arbitrarily nested arrays of integers
+  # into a flat array of integers. e.g. [[1,2,[3]],4] -> [1,2,3,4].
+  def get_flattened_array(arry)
     flattened = []
 
     unless arry.nil?
@@ -22,7 +23,7 @@ module Helpers
         if x.kind_of?(Array)
           # we need to ensure that the previous flattened values are appended to
           # the results of the recursion
-          flattened += get_flattened(x)
+          flattened += get_flattened_array(x)
         else
           flattened << x
         end
