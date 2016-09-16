@@ -31,5 +31,39 @@ describe 'above_given' do
     results_a = helper_wrapper.new.above_below_given([], 5)
     expect(results_a).to include(:above => 0, :below => 0)
   end
+end
 
+describe 'get_flattened' do
+  let(:helper_wrapper) { Class.new { include Helpers } }
+  let(:expected_flattened) { [1,2,3,4] }
+
+  it 'should flatten 1 level deep' do
+    result = helper_wrapper.new.get_flattened([1,2,3,4])
+    expect(result).to match_array(expected_flattened)
+  end
+
+  it 'should get flatten 2 levels deep' do
+    result = helper_wrapper.new.get_flattened([1,[2,3],4])
+    expect(result).to match_array(expected_flattened)
+  end
+
+  it 'should get flatten many levels deep' do
+    result = helper_wrapper.new.get_flattened([[1,2,[3]],4])
+    expect(result).to match_array(expected_flattened)
+  end
+
+  it 'should flatten ludicrously deep' do
+    result = helper_wrapper.new.get_flattened([[[1],[[2]],[3],4]])
+    expect(result).to match_array(expected_flattened)
+  end
+
+  it 'should handle nil array' do
+    result = helper_wrapper.new.get_flattened(nil)
+    expect(result).to match_array([])
+  end
+
+  it 'should handle empty array' do
+    result = helper_wrapper.new.get_flattened(nil)
+    expect(result).to match_array([])
+  end
 end
